@@ -75,45 +75,44 @@ class Login extends Component {
     if (username.value === '' && password.value === '') {
       alert('Username and Password must not be blank  ')
     } else {
-      var body = {
-        'username': username.value,
-        'password': password.value
-      }
+      // var body = {
+      //   'username': username.value,
+      //   'password': password.value
+      // }
       var params = new URLSearchParams();
-      params.append('username', username.value);
-      params.append('password', password.value);
+      params.append('Email', username.value);
+      params.append('Password', password.value);
       axios({
         method: 'post',
-        url: '../../Backend/Auth/Login.py',
+        url: 'http://localhost:5000/login',
         data: params
       })
         .then(function (response) {
-
-          console.log(response.data)
-          if (response.data == "" || response.data == null) {
-            alert("Please check your credentials")
-          }else {
-            if (response.data.LoginPermission == 0) {
-              //alert("No issues with login permission")
-              // storelocaldata()
-              localStorage.setItem("UAID", response.data.UAID);
-              localStorage.setItem("EmailID", response.data.EmailID);
-              localStorage.setItem("Username", response.data.Username);
-              window.history.pushState(null, "", "/home");
-                window.location.reload();
-            } else if (response.data.LoginPermission == -1) {
-              alert("Your Account is banned.")
-            } else if (response.data.LoginPermission == 1) {
-              alert("You are the premium user")
-              localStorage.setItem("UAID", response.data.UAID);
-              localStorage.setItem("EmailID", response.data.EmailID);
-              localStorage.setItem("Username", response.data.Username);
-              window.history.pushState(null, "", "/home");
-              window.location.reload();
-            } else {
-              alert("Something else")
-            }
-          }
+         console.log(response.data)
+          // if (response.data == "" || response.data == null) {
+          //   alert("Please check your credentials")
+          // }else {
+          //   if (response.data.LoginPermission == 0) {
+          //     //alert("No issues with login permission")
+          //     // storelocaldata()
+          //     localStorage.setItem("UAID", response.data.UAID);
+          //     localStorage.setItem("EmailID", response.data.EmailID);
+          //     localStorage.setItem("Username", response.data.Username);
+          //     window.history.pushState(null, "", "/home");
+          //       window.location.reload();
+          //   } else if (response.data.LoginPermission == -1) {
+          //     alert("Your Account is banned.")
+          //   } else if (response.data.LoginPermission == 1) {
+          //     alert("You are the premium user")
+          //     localStorage.setItem("UAID", response.data.UAID);
+          //     localStorage.setItem("EmailID", response.data.EmailID);
+          //     localStorage.setItem("Username", response.data.Username);
+          //     window.history.pushState(null, "", "/home");
+          //     window.location.reload();
+          //   } else {
+          //     alert("Something else")
+          //   }
+         // }
           // if(response.data.FirstName === undefined){
           //   alert("Please Check Your Username and Password")
           // }else{

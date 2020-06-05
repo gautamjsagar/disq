@@ -76,26 +76,24 @@ class register extends Component {
       var params = new URLSearchParams();
       params.append('Username', this.state.username);
       params.append('Password', this.state.password);
-      params.append('Role', this.state.role);
       params.append('MobileNumber', this.state.mobilenumber);
-      params.append('Condition', 'Insert Data');
       console.log(params)
       axios({
         method: 'post',
-        url: '../../Backend/Auth/Register.php',
+        url: 'http://localhost:5000/register',
         data: params
       })
         .then((response) => {
           console.log(response.data)
-          //    alert(response.data)
-          //console.log("Duplicate entry '" + this.state.username + "' for key 'Username'")
-          if (response.data === "Duplicate entry '" + this.state.username + "' for key 'Username'") {
-            alert("This username is taken...")
-          } else {
-            alert('Registration Successful...')
-            window.history.pushState(null, "", "/login");
-            window.location.reload();
-          }
+          // //    alert(response.data)
+          // //console.log("Duplicate entry '" + this.state.username + "' for key 'Username'")
+          // if (response.data === "Duplicate entry '" + this.state.username + "' for key 'Username'") {
+          //   alert("This username is taken...")
+          // } else {
+          //   alert('Registration Successful...')
+          //   window.history.pushState(null, "", "/login");
+          //   window.location.reload();
+          // }
         })
         .catch(function (error) {
           console.log(error);
@@ -104,6 +102,7 @@ class register extends Component {
 
   }
 
+  
   render() {
     const { classes } = this.props;
     return (<div>
@@ -166,24 +165,7 @@ class register extends Component {
                 type="tel"
                 id="mobilenumber"
               />
-              <FormControl className={classes.formControl}>
-                <InputLabel>Role</InputLabel>
-                <Select
-                  labelId="Role"
-                  id="roler"
-                  name="role"
-                  onChange={this.inputchange}
-                  style={{ width: "400px" }}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={"Alumni"}>Alumni</MenuItem>
-                  <MenuItem value={"College"}>College Authority</MenuItem>
-                  <MenuItem value={"Directorate"}>Directorate</MenuItem>
-                </Select>
-                <FormHelperText>Please select your Role</FormHelperText>
-              </FormControl>
+              
               <Button
                 type="submit"
                 fullWidth
